@@ -1,0 +1,37 @@
+{
+  "name": "textalive-app-lottie",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Lottieのアニメーションを活用したTextAlive App APIの作例",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel src/index.html --out-dir dev",
+    "build": "parcel build src/index.html --public-url ./ --out-dir docs --no-source-maps",
+    "clean": "del-cli .cache dev docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TextAliveJp/textalive-app-lottie.git"
+  },
+  "keywords": [
+    "textalive",
+    "lottie"
+  ],
+  "author": "",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/TextAliveJp/textalive-app-lottie/issues"
+  },
+  "homepage": "https://github.com/TextAliveJp/textalive-app-lottie#readme",
+  "dependencies": {
+    "lottie-web": "^5.7.3",
+    "textalive-app-api": "^0.2.0"
+  },
+  "devDependencies": {
+    "del-cli": "^3.0.1",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-asset-copier": "^1.1.0",
+    "parcel-plugin-clean-dist": "0.0.6"
+  },
+  "assetsPath": "src/assets"
+}
