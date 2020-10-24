@@ -5,11 +5,32 @@ body {
 #text {
   color: #c3e5e7;
   font-size: 80%;
+  z-index: 1;
 }
 
-#lottie {
+/* #text_emph {
+  color: #137a7f;
+  font-size: 80%;
+  z-index: 1;
+} */
+
+#lottie_lightblueStar {
+  height: 70%;
+  
   position: absolute;
-  top: 0;
+  top: -70;
+  right: -70%;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+}
+
+#lottie_blueLine {
+  position: absolute;
+  top: 100;
   right: 0;
   bottom: 0;
   left: 0;

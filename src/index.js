@@ -10,7 +10,9 @@
  * - https://developer.textalive.jp/app/
  */
 
-import { Player } from "textalive-app-api";
+import {
+  Player
+} from "textalive-app-api";
 import lottie from "lottie-web";
 
 // TextAlive Player を作る
@@ -25,16 +27,28 @@ const player = new Player({
 
 // Lottie のアニメーションを読み込む
 // Load Lottie animation
-const lottieContainer = document.querySelector("#lottie");
-const lottiePhase = 0.75;
-const lottieAnimation = lottie.loadAnimation({
-  container: lottieContainer,
+const lottieContainer_lightblueStar = document.querySelector("#lottie_lightblueStar");
+const lottiePhase_lightblueStar = 0.05;
+const lottieAnimation_lightblueStar = lottie.loadAnimation({
+  container: lottieContainer_lightblueStar,
   renderer: "svg",
   loop: true,
   autoplay: false,
-  path: "./fw_white.json",
+  path: "./lightblueStar.json",
 });
-lottieContainer.style.opacity = 0;
+// lottieContainer.style.opacity = 0;
+lottieContainer_lightblueStar.style.opacity = 0;
+  
+const lottieContainer_blueLine = document.querySelector("#lottie_blueLine");
+const lottiePhase_blueLine = 0.05;
+const lottieAnimation_blueLine = lottie.loadAnimation({
+  container: lottieContainer_blueLine,
+  renderer: "svg",
+  loop: true,
+  autoplay: false,
+  path: "./blueLine.json",
+});
+lottieContainer_blueLine.style.opacity = 0;
 
 // TextAlive Player のイベントリスナを登録する
 // Register event listeners
@@ -90,7 +104,7 @@ function onAppReady(app) {
   jumpBtn.addEventListener(
     "click",
     () =>
-      player.video && player.requestMediaSeek(player.video.firstChar.startTime)
+    player.video && player.requestMediaSeek(player.video.firstChar.startTime)
   );
 
   // 一時停止ボタン / Pause music playback
@@ -150,15 +164,18 @@ function onPlay() {
 // 再生が一時停止したら Lottie のアニメーションも停止
 // Stop Lottie animation when music playback is paused
 function onPause() {
-  lottieAnimation.stop();
+  lottieAnimation_lightblueStar.stop();
+  lottieAnimation_blueLine.stop();
 }
 
 // 再生が停止したら歌詞表示をリセット
 // Reset lyrics text field when music playback is stopped
 function onStop() {
   textSpan.textContent = "";
-  lottieAnimation.stop();
-  lottieContainer.style.opacity = 0;
+  lottieAnimation_lightblueStar.stop();
+  lottieAnimation_blueLine.stop();
+  lottieContainer_lightblueStar.style.opacity = 0;
+  lottieContainer_blueLine.style.opacity = 0;
 }
 
 /**
@@ -183,10 +200,12 @@ function handleChar(position) {
   }
   phrase = player.video.findPhrase(position);
   if (phrase) {
-    lottieContainer.style.opacity = 1;
+    lottieContainer_lightblueStar.style.opacity = 1;
+    lottieContainer_blueLine.style.opacity = 1;
     textSpan.textContent = phrase.text;
   } else {
-    lottieContainer.style.opacity = 0.3;
+    lottieContainer_lightblueStar.style.opacity = 0.3;
+    lottieContainer_blueLine.style.opacity = 0.3;
     textSpan.textContent = "";
   }
 }
@@ -194,6 +213,7 @@ function handleChar(position) {
 /**
  * ビートに合わせて Lottie アニメーションを再生 / Play Lottie animation in response to beats
  */
+
 function handleBeat(position) {
   if (beat && beat.contains(position)) {
     return;
@@ -202,10 +222,42 @@ function handleBeat(position) {
   if (!beat) {
     return;
   }
-  const duration = lottieAnimation.getDuration() * 700;
+  const duration = lottieAnimation_lightblueStar.getDuration() * 1000;
   const speed = beat.duration / duration;
   const offset =
-    (position - beat.startTime + duration * lottiePhase) % duration;
-  lottieAnimation.setSpeed(speed);
-  lottieAnimation.goToAndPlay(offset);
+    (position - beat.startTime + duration * lottiePhase_lightblueStar) % duration;
+  lottieAnimation_lightblueStar.setSpeed(speed * 8);
+  lottieAnimation_lightblueStar.goToAndPlay(offset);
+
+
+  if (player.findChorus(position) != null) {
+    lottieAnimation_blueLine.stop();
+    const offset =
+      (position - beat.startTime + duration * lottiePhase_lightblueStar) % duration;
+    lottieAnimation_lightblueStar.setSpeed(speed * 8);
+    lottieAnimation_lightblueStar.goToAndPlay(offset);
+  } else {
+    lottieAnimation_lightblueStar.stop();
+    const offset =
+      (position - beat.startTime + duration * lottiePhase_blueLine) % duration;
+    lottieAnimation_blueLine.setSpeed(speed * 8);
+    lottieAnimation_blueLine.goToAndPlay(offset);
+  }
+
 }
+
+// function handleBeat(position) {
+//   if (beat && beat.contains(position)) {
+//     return;
+//   }
+//   beat = player.findBeat(position);
+//   if (!beat) {
+//     return;
+//   }
+//   const duration = lottieAnimation.getDuration() * 700;
+//   const speed = beat.duration / duration;
+//   const offset =
+//     (position - beat.startTime + duration * lottiePhase) % duration;
+//   lottieAnimation.setSpeed(speed);
+//   lottieAnimation.goToAndPlay(offset);
+// }
