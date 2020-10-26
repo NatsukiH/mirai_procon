@@ -50,16 +50,16 @@ const lottieAnimation_blueLine = lottie.loadAnimation({
 });
 lottieContainer_blueLine.style.opacity = 0;
 
-// const lottieContainer_beatBar = document.querySelector("#lottie_beatBar");
-// const lottiePhase_beatBar = 0.05;
-// const lottieAnimation_beatBar = lottie.loadAnimation({
-//   container: lottieContainer_beatBar,
-//   renderer: "svg",
-//   loop: true,
-//   autoplay: false,
-//   path: "./beatBar.json",
-// });
-// lottieContainer_beatBar.style.opacity = 0;
+const lottieContainer_beatBar = document.querySelector("#lottie_beatBar");
+const lottiePhase_beatBar = 0.05;
+const lottieAnimation_beatBar = lottie.loadAnimation({
+  container: lottieContainer_beatBar,
+  renderer: "svg",
+  loop: true,
+  autoplay: false,
+  path: "./beatBar.json",
+});
+lottieContainer_beatBar.style.opacity = 0;
 
 // TextAlive Player のイベントリスナを登録する
 // Register event listeners
@@ -177,7 +177,7 @@ function onPlay() {
 function onPause() {
   lottieAnimation_lightblueStar.stop();
   lottieAnimation_blueLine.stop();
-  // lottieAnimation_beatBar.stop();
+  lottieAnimation_beatBar.stop();
 }
 
 // 再生が停止したら歌詞表示をリセット
@@ -186,10 +186,10 @@ function onStop() {
   textSpan.textContent = "";
   lottieAnimation_lightblueStar.stop();
   lottieAnimation_blueLine.stop();
-  // lottieAnimation_beatBar.stop();
+  lottieAnimation_beatBar.stop();
   lottieContainer_lightblueStar.style.opacity = 0;
   lottieContainer_blueLine.style.opacity = 0;
-  // lottieContainer_beatBar.style.opacity = 0;
+  lottieContainer_beatBar.style.opacity = 0;
 }
 
 /**
@@ -216,12 +216,12 @@ function handleChar(position) {
   if (phrase) {
     lottieContainer_lightblueStar.style.opacity = 1;
     lottieContainer_blueLine.style.opacity = 1;
-    // lottieContainer_beatBar.style.opacity = 1;
+    lottieContainer_beatBar.style.opacity = 1;
     textSpan.textContent = phrase.text;
   } else {
     lottieContainer_lightblueStar.style.opacity = 0.3;
     lottieContainer_blueLine.style.opacity = 0.3;
-    // lottieContainer_beatBar.style.opacity = 0.3;
+    lottieContainer_beatBar.style.opacity = 0.3;
     textSpan.textContent = "";
   }
 }
@@ -242,7 +242,7 @@ function handleBeat(position) {
   const speed = beat.duration / duration;
   const offset =
     (position - beat.startTime + duration * lottiePhase_lightblueStar) % duration;
-  lottieAnimation_lightblueStar.setSpeed(speed * 8);
+  lottieAnimation_lightblueStar.setSpeed(speed * 10);
   lottieAnimation_lightblueStar.goToAndPlay(offset);
 
 
@@ -250,37 +250,21 @@ function handleBeat(position) {
     lottieAnimation_blueLine.stop();
     const offset =
       (position - beat.startTime + duration * lottiePhase_lightblueStar) % duration;
-    lottieAnimation_lightblueStar.setSpeed(speed * 8);
+    lottieAnimation_lightblueStar.setSpeed(speed * 9);
     lottieAnimation_lightblueStar.goToAndPlay(offset);
   } else {
     lottieAnimation_lightblueStar.stop();
     const offset =
       (position - beat.startTime + duration * lottiePhase_blueLine) % duration;
-    lottieAnimation_blueLine.setSpeed(speed * 8);
+    lottieAnimation_blueLine.setSpeed(speed * 9);
     lottieAnimation_blueLine.goToAndPlay(offset);
   }
 
-  // const duration_beatBar = lottieAnimation_beatBar.getDuration() * 1000;
-  // const speed_beatBar = beat.duration / duration_beatBar;
-  // const offset_beatBar =
-  //   (position - beat.startTime + duration_beatBar * lottiePhase_beatBar) % duration_beatBar;
-  // lottieAnimation_beatBar.setSpeed(speed_beatBar);
-  // lottieAnimation_beatBar.goToAndPlay(offset_beatBar);
+  const duration_beatBar = lottieAnimation_beatBar.getDuration() * 1000;
+  const speed_beatBar = beat.duration / duration_beatBar;
+  const offset_beatBar =
+    (position - beat.startTime + duration_beatBar * lottiePhase_beatBar) % duration_beatBar;
+  lottieAnimation_beatBar.setSpeed(speed_beatBar * 10);
+  lottieAnimation_beatBar.goToAndPlay(offset_beatBar);
 
 }
-
-// function handleBeat(position) {
-//   if (beat && beat.contains(position)) {
-//     return;
-//   }
-//   beat = player.findBeat(position);
-//   if (!beat) {
-//     return;
-//   }
-//   const duration = lottieAnimation.getDuration() * 700;
-//   const speed = beat.duration / duration;
-//   const offset =
-//     (position - beat.startTime + duration * lottiePhase) % duration;
-//   lottieAnimation.setSpeed(speed);
-//   lottieAnimation.goToAndPlay(offset);
-// }

@@ -51,17 +51,18 @@ body {
   z-index: 0;
 }
 
-/* #lottie_beatBar {
+#lottie_beatBar {
+  height: 200px;
   position: absolute;
-  top: 300;
-  right: 0;
+  top: 72%;
+  right: -60%;
   bottom: 0;
   left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 0;
-} */
+}
 
 #overlay {
   position: absolute;
