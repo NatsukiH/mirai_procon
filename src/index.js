@@ -61,6 +61,17 @@ const lottieAnimation_beatBar = lottie.loadAnimation({
 });
 lottieContainer_beatBar.style.opacity = 0;
 
+const lottieContainer_manyStars = document.querySelector("#lottie_manyStars");
+const lottiePhase_manyStars = 0.05;
+const lottieAnimation_manyStars = lottie.loadAnimation({
+  container: lottieContainer_manyStars,
+  renderer: "svg",
+  loop: false,
+  autoplay: false,
+  path: "./manyStars.json",
+});
+lottieContainer_manyStars.style.opacity = 0;
+
 // TextAlive Player のイベントリスナを登録する
 // Register event listeners
 player.addListener({
@@ -178,6 +189,11 @@ function onPause() {
   lottieAnimation_lightblueStar.stop();
   lottieAnimation_blueLine.stop();
   lottieAnimation_beatBar.stop();
+  lottieAnimation_manyStars.stop();
+  lottieContainer_lightblueStar.style.opacity = 0;
+  lottieContainer_blueLine.style.opacity = 0;
+  lottieContainer_beatBar.style.opacity = 0;
+  lottieContainer_manyStars.style.opacity = 0;
 }
 
 // 再生が停止したら歌詞表示をリセット
@@ -187,9 +203,11 @@ function onStop() {
   lottieAnimation_lightblueStar.stop();
   lottieAnimation_blueLine.stop();
   lottieAnimation_beatBar.stop();
+  lottieAnimation_manyStars.stop();
   lottieContainer_lightblueStar.style.opacity = 0;
   lottieContainer_blueLine.style.opacity = 0;
   lottieContainer_beatBar.style.opacity = 0;
+  lottieContainer_manyStars.style.opacity = 0;
 }
 
 /**
@@ -203,26 +221,47 @@ function onTimeUpdate(position) {
 }
 
 let phrase = null,
-  beat = null;
+  beat = null, word = null;
 
 /**
  * 歌詞を表示 / Show lyrics
  */
+const flag = 0;
+
 function handleChar(position) {
   if (phrase && phrase.contains(position)) {
     return;
   }
   phrase = player.video.findPhrase(position);
+  // word = player.video.findWord(position);
   if (phrase) {
     lottieContainer_lightblueStar.style.opacity = 1;
     lottieContainer_blueLine.style.opacity = 1;
     lottieContainer_beatBar.style.opacity = 1;
+    lottieContainer_manyStars.style.opacity = 1;
     textSpan.textContent = phrase.text;
   } else {
     lottieContainer_lightblueStar.style.opacity = 0.3;
     lottieContainer_blueLine.style.opacity = 0.3;
-    lottieContainer_beatBar.style.opacity = 0.3;
+    lottieContainer_beatBar.style.opacity = 1;
+    lottieContainer_manyStars.style.opacity = 0;
     textSpan.textContent = "";
+  }
+
+  // if(String(word).indexOf("グリーン")){
+  //   // lottieAnimation_manyStars.play();
+  //   lottieAnimation_manyStars.goToAndPlay(1);
+  // }
+  
+  if(String(phrase).indexOf("グリーンライツ") !== -1){
+    lottieAnimation_manyStars.goToAndPlay(lottieAnimation_manyStars.getDuration()/2);
+    lottieContainer_manyStars.style.opacity = 1;
+    flag = 1;
+  }
+  if(flag == 1 && (String(phrase).indexOf("グリーンライツ") == -1 || phrase == null)){
+    lottieAnimation_manyStars.pause();
+    lottieContainer_manyStars.style.opacity = 0;
+    flag = 0;
   }
 }
 
@@ -266,5 +305,4 @@ function handleBeat(position) {
     (position - beat.startTime + duration_beatBar * lottiePhase_beatBar) % duration_beatBar;
   lottieAnimation_beatBar.setSpeed(speed_beatBar * 10);
   lottieAnimation_beatBar.goToAndPlay(offset_beatBar);
-
 }

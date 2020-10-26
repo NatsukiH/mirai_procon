@@ -8,7 +8,7 @@ body {
 }
 
 #artist, #song{
-  font-size: 25px;
+  font-size: 30px;
   font-family: "Nico Moji";
   color:#86cecb;
 }
@@ -64,6 +64,19 @@ body {
   z-index: 0;
 }
 
+#lottie_manyStars {
+  height: 300px;
+  position: absolute;
+  top: 27%;
+  right: -75%;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+}
+
 #overlay {
   position: absolute;
   top: 0;
@@ -84,6 +97,9 @@ body {
 .fontAwesomePlay {
   color: #137a7f;
   font-size: 7em;
+}
+.fontAwesomePlay:hover{
+  color:#ffffff;
 }
 
 #container {
