@@ -1,10 +1,21 @@
+html{
+  width: 100vw;
+}
+
 body {
   background-image: url("../background.jpg");
+  font-family: "Noto Sans JP";
+}
+
+#artist, #song{
+  font-size: 25px;
+  font-family: "Nico Moji";
+  color:#86cecb;
 }
 
 #text {
   color: #c3e5e7;
-  font-size: 80%;
+  font-size: 70%;
   z-index: 1;
 }
 
@@ -16,7 +27,7 @@ body {
 
 #lottie_lightblueStar {
   height: 70%;
-  
+
   position: absolute;
   top: -70;
   right: -70%;
@@ -40,6 +51,18 @@ body {
   z-index: 0;
 }
 
+/* #lottie_beatBar {
+  position: absolute;
+  top: 300;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+} */
+
 #overlay {
   position: absolute;
   top: 0;
@@ -57,9 +80,9 @@ body {
   padding: 7em;
 }
 
-.fontAwesomePlay{
+.fontAwesomePlay {
   color: #137a7f;
-  font-size: 7em
+  font-size: 7em;
 }
 
 #container {
@@ -72,7 +95,7 @@ body {
   z-index: 50;
 }
 
-#container > div {
+#container>div {
   width: 100%;
 }
 
@@ -86,6 +109,7 @@ body {
   0% {
     transform: translate3d(0, 100%, 0);
   }
+
   100% {
     transform: translate3d(0, 0, 0);
   }
@@ -115,7 +139,7 @@ body {
 #meta {
   margin: 10px;
   padding: 5px;
-  background: #fff3;
+  /* background: #fff3; */
 }
 
 #footer {
@@ -124,19 +148,45 @@ body {
   bottom: 0;
 }
 
-#footer > p {
+#footer>p {
   margin-left: 10px;
 }
 
 #control {
-  margin: 10px;
+  margin: 20px 30px;
   padding: 5px;
-  background: #fff3;
+  /* background: #fff3; */
+
+  list-style: none;
+  overflow: hidden;
 }
 
-#control > button {
+#control li{
+  text-align: center;
+  float: left;
+  display: block;
+  color: #86cecb;
+}
+
+#control i{
+  display: block;
+}
+
+#control>button {
   margin-right: 5px;
 }
-#control > button:last-child {
+
+#control>button:last-child {
   margin-right: 0;
+}
+
+.UIicon {
+  padding: 40px 40px 10px 40px;
+  color: #86cecb;
+  font-size: 3em;
+  text-shadow: 1px 1px 1px #ccc;
+}
+
+.UIicon:hover {
+  color:#ffffff;
 }
