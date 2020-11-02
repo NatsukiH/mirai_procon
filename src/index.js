@@ -226,7 +226,7 @@ let phrase = null,
 /**
  * 歌詞を表示 / Show lyrics
  */
-const flag = 0;
+const flag = 0, colorFlag = 0;
 
 function handleChar(position) {
   if (phrase && phrase.contains(position)) {
@@ -240,6 +240,7 @@ function handleChar(position) {
     lottieContainer_beatBar.style.opacity = 1;
     lottieContainer_manyStars.style.opacity = 1;
     textSpan.textContent = phrase.text;
+
   } else {
     lottieContainer_lightblueStar.style.opacity = 0.3;
     lottieContainer_blueLine.style.opacity = 0.3;
@@ -248,12 +249,7 @@ function handleChar(position) {
     textSpan.textContent = "";
   }
 
-  // if(String(word).indexOf("グリーン")){
-  //   // lottieAnimation_manyStars.play();
-  //   lottieAnimation_manyStars.goToAndPlay(1);
-  // }
-  
-  if(String(phrase).indexOf("グリーンライツ") !== -1){
+  if(String(phrase).indexOf("グリーンライツ") != -1){
     lottieAnimation_manyStars.goToAndPlay(lottieAnimation_manyStars.getDuration()/2);
     lottieContainer_manyStars.style.opacity = 1;
     flag = 1;
@@ -263,6 +259,8 @@ function handleChar(position) {
     lottieContainer_manyStars.style.opacity = 0;
     flag = 0;
   }
+
+  console.log(colorFlag);
 }
 
 /**
