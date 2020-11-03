@@ -1,4 +1,11 @@
-# TextAlive App API lottie example
+# 用いたサンプルの詳細
+以下に用いたサンプルのREADMEを記載します．
+実行方法は以下の方法と同じです．
+
+<details>
+<summary>
+TextAlive App API lottie example
+</summary>
 
 Adobe After Effects で作成したアニメーションを Lottie プラグインで書き出したものをビートに合わせて表示するサンプルコードです。 Lottie 関係の部分以外は [basic example](https://github.com/TextAliveJp/textalive-app-basic) そのままです。
 
@@ -45,4 +52,7 @@ TextAlive App API は、音楽に合わせてタイミングよく歌詞が動�
 TextAlive App API について詳しくはWebサイト [TextAlive for Developers](https://developer.textalive.jp/) をご覧ください。
 
 ---
+https://github.com/TextAliveJp/textalive-app-lottie
+
+</details>
 https://github.com/TextAliveJp/textalive-app-lottie
