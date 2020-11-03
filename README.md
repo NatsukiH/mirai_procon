@@ -1,5 +1,16 @@
-# 用いたサンプルの詳細
-以下に用いたサンプルのREADMEを記載します．
+# デモ動画
+画像をクリックするとYouTubeに飛びます.
+### フルver
+[![デモ動画](http://img.youtube.com/vi/0HFIuts8mSY/0.jpg)](http://www.youtube.com/watch?v=0HFIuts8mSY "")
+
+### UI操作ver
+[![デモ動画](http://img.youtube.com/vi/V-sTHr-Fv24/0.jpg)](http://www.youtube.com/watch?v=V-sTHr-Fv24 "")
+
+# アピールポイント
+
+
+# 用いたサンプルコードの詳細
+以下に用いたサンプルのREADMEを記載します．  
 実行方法は以下の方法と同じです．
 
 <details>
@@ -51,8 +62,6 @@ TextAlive App API は、音楽に合わせてタイミングよく歌詞が動�
 
 TextAlive App API について詳しくはWebサイト [TextAlive for Developers](https://developer.textalive.jp/) をご覧ください。
 
----
-https://github.com/TextAliveJp/textalive-app-lottie
 
 </details>
 https://github.com/TextAliveJp/textalive-app-lottie
